@@ -1204,7 +1204,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1646483563}
         m_TargetAssemblyTypeName: Preguntas, Assembly-CSharp
-        m_MethodName: Pisos
+        m_MethodName: ObtenerAltura
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3041,7 +3041,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1646483563}
         m_TargetAssemblyTypeName: Preguntas, Assembly-CSharp
-        m_MethodName: Pisos
+        m_MethodName: ObtenerLargo
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4669,7 +4669,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1646483563}
         m_TargetAssemblyTypeName: Preguntas, Assembly-CSharp
-        m_MethodName: Pisos
+        m_MethodName: ObtenerAnchura
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
