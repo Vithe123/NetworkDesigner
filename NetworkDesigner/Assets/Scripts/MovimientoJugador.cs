@@ -37,6 +37,10 @@ public class MovimientoJugador : MonoBehaviour
             {
                 dy -= moveSpeed * dt;
             }
+            if(Input.GetKeyDown(KeyCode.W))
+            {
+
+            }
             float dx = Input.GetAxis("Horizontal") * dt * moveSpeed;
             float dz = Input.GetAxis("Vertical") * dt * moveSpeed;
 

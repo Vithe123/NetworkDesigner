@@ -12,10 +12,10 @@ public class InformacionEntreEscenas : MonoBehaviour
     public string ancho;
     public string alto;
 
-    private string numPisosPrefsName = "numPisos";
-    private string largoPrefsName = "largo";
-    private string anchoPrefsName = "ancho";
-    private string altoPrefsName = "alto";
+    private string numPisosPrefsName = "NumPisos";
+    private string largoPrefsName = "Largo";
+    private string anchoPrefsName = "Ancho";
+    private string altoPrefsName = "Alto";
     #endregion
 
     private void Awake()
