@@ -5,8 +5,8 @@ using UnityEngine;
 public class CubePlacer : MonoBehaviour
 {
     private Grid grid;
-
     public GameObject Pilar;
+    public GameObject LastHit;
 
     private void Awake()
     {
@@ -16,22 +16,43 @@ public class CubePlacer : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            RaycastHit hitInfo;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Vector3 collision = Vector3.zero;
+        RaycastHit hitInfo;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if(Physics.Raycast(ray, out hitInfo))
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Physics.Raycast(ray, out hitInfo))
             {
-                PlaceCubeNear(hitInfo.point);
+                LastHit = hitInfo.transform.gameObject;
+                collision = hitInfo.point;
+                if (LastHit.tag != "Pilar" && LastHit.tag != "PilarC")
+                {
+                    PlaceCubeNear(hitInfo.point);
+                }
+            }
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (Physics.Raycast(ray, out hitInfo))
+            {
+                BoxCollider bc = hitInfo.collider as BoxCollider;
+                if (bc != null)
+                {
+                    Destroy(bc.gameObject);
+                }
             }
         }
     }
 
     private void PlaceCubeNear(Vector3 clickPoint)
     {
-        GameObject Pilares = Instantiate(Pilar) as GameObject;
-        var finalPosition = grid.GetNearestPointOnGrid(clickPoint);
-        Pilares.transform.position = finalPosition;
+        if ((Input.GetAxis("Horizontal") >= -45 && Input.GetAxis("Horizontal") <= 45) || (Input.GetAxis("Horizontal") <= -135 && Input.GetAxis("Horizontal") >= 135))
+        {
+            GameObject Pilares = Instantiate(Pilar) as GameObject;
+            var finalPosition = grid.GetNearestPointOnGrid(clickPoint);
+            Pilares.transform.position = finalPosition;
+        }
     }
+
 }

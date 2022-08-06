@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Terreno
   - Pilar
+  - PilarC
   layers:
   - Default
   - TransparentFX
