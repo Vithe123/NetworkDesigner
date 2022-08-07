@@ -33,7 +33,6 @@ public class SpawnTerreno : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     private void StringToInt()
@@ -48,8 +47,7 @@ public class SpawnTerreno : MonoBehaviour
     {
         GameObject terreno_medidas = Instantiate(Terreno) as GameObject;
         terreno_medidas.transform.position = new Vector3(0, 0, 0);
-        terreno_medidas.transform.localScale = new Vector3(_ancho, 1, _largo);  // x z 
-        Contenedor.SetActive(false);
+        terreno_medidas.transform.localScale = new Vector3(_ancho, 1, _largo);  // x 
     }
 
     private void LoadData()
@@ -61,9 +59,9 @@ public class SpawnTerreno : MonoBehaviour
     }
     private void AgrandarPilar()
     {
-        GameObject pilares = Instantiate(Pilar) as GameObject;
-        pilares.transform.position = new Vector3(0, 0, 0);
-        pilares.transform.localScale = new Vector3(TamPilar, _alto, TamPilar);  // x z 
+        Pilar.transform.position = new Vector3(0, 0, 0);
+        Pilar.transform.localScale = new Vector3(1.0f, _alto*10.0f, 1.0f);  // x z 
+        Contenedor.SetActive(false);
     }
 
     private void GenerarBarda()
