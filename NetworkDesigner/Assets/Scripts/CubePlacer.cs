@@ -8,6 +8,9 @@ public class CubePlacer : MonoBehaviour
     public GameObject Pilar;
     public GameObject LastHit;
 
+    [SerializeField]
+    private float dx;
+
     private void Awake()
     {
         grid = FindObjectOfType<Grid>();
@@ -26,10 +29,10 @@ public class CubePlacer : MonoBehaviour
             {
                 LastHit = hitInfo.transform.gameObject;
                 collision = hitInfo.point;
-                if (LastHit.tag != "Pilar" && LastHit.tag != "PilarC")
+                if (LastHit.tag != "Pilar")
                 {
                     PlaceCubeNear(hitInfo.point);
-                }
+                } 
             }
         }
         if (Input.GetMouseButtonDown(1))
@@ -47,12 +50,8 @@ public class CubePlacer : MonoBehaviour
 
     private void PlaceCubeNear(Vector3 clickPoint)
     {
-        if ((Input.GetAxis("Horizontal") >= -45 && Input.GetAxis("Horizontal") <= 45) || (Input.GetAxis("Horizontal") <= -135 && Input.GetAxis("Horizontal") >= 135))
-        {
-            GameObject Pilares = Instantiate(Pilar) as GameObject;
-            var finalPosition = grid.GetNearestPointOnGrid(clickPoint);
-            Pilares.transform.position = finalPosition;
-        }
+        GameObject Pilares = Instantiate(Pilar) as GameObject;
+        var finalPosition = grid.GetNearestPointOnGrid(clickPoint);
+        Pilares.transform.position = finalPosition;
     }
-
 }

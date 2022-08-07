@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class SpawnTerreno : MonoBehaviour
 {
+    public static SpawnTerreno spawnT;
+
+    public GameObject Contenedor;
     public GameObject Terreno;
+    public GameObject Pilar;
 
     private int _numPisos;
     private float _largo;
     private float _ancho;
     private float _alto;
+    public float TamPilar = 1.0f;
 
     private string numPisos;
     private string largo;
@@ -21,6 +26,8 @@ public class SpawnTerreno : MonoBehaviour
         LoadData();
         StringToInt();
         SpawnearTerreno();
+        AgrandarPilar();
+        GenerarBarda();
     }
 
     // Update is called once per frame
@@ -31,7 +38,7 @@ public class SpawnTerreno : MonoBehaviour
 
     private void StringToInt()
     {
-        _numPisos = int.Parse(numPisos);
+        bool success = int.TryParse(numPisos, out _numPisos);
         _largo = float.Parse(largo);
         _ancho = float.Parse(ancho);
         _alto = float.Parse(alto);
@@ -42,7 +49,7 @@ public class SpawnTerreno : MonoBehaviour
         GameObject terreno_medidas = Instantiate(Terreno) as GameObject;
         terreno_medidas.transform.position = new Vector3(0, 0, 0);
         terreno_medidas.transform.localScale = new Vector3(_ancho, 1, _largo);  // x z 
-
+        Contenedor.SetActive(false);
     }
 
     private void LoadData()
@@ -51,5 +58,16 @@ public class SpawnTerreno : MonoBehaviour
         largo = InformacionEntreEscenas.instancia.largo;
         ancho = InformacionEntreEscenas.instancia.ancho;
         alto = InformacionEntreEscenas.instancia.alto;
+    }
+    private void AgrandarPilar()
+    {
+        GameObject pilares = Instantiate(Pilar) as GameObject;
+        pilares.transform.position = new Vector3(0, 0, 0);
+        pilares.transform.localScale = new Vector3(TamPilar, _alto, TamPilar);  // x z 
+    }
+
+    private void GenerarBarda()
+    {
+        //Estandarizar medidas para bardas.
     }
 }

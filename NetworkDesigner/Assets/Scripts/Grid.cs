@@ -5,7 +5,7 @@ using UnityEngine;
 public class Grid : MonoBehaviour
 {
     [SerializeField]
-    private float size = 1f;
+    private float size = SpawnTerreno.spawnT.TamPilar; //No se si esto funcione si no declarar el tamaño fijo sin instancia
 
     public Vector3 GetNearestPointOnGrid(Vector3 position)
     {

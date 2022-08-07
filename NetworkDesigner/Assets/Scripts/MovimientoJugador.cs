@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class MovimientoJugador : MonoBehaviour
 {
+    public static MovimientoJugador movimientoJugador;
+
+    public float enviarDX;
+
     private new Rigidbody cuerpoRigido;
 
     public float velocidad = 40f;
@@ -42,6 +46,7 @@ public class MovimientoJugador : MonoBehaviour
 
             }
             float dx = Input.GetAxis("Horizontal") * dt * moveSpeed;
+            enviarDX = dx;
             float dz = Input.GetAxis("Vertical") * dt * moveSpeed;
 
             cc.Move(transform.TransformDirection(new Vector3(dx, dy, dz)));
