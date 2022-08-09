@@ -20,6 +20,12 @@ public class SpawnTerreno : MonoBehaviour
     private string largo;
     private string ancho;
     private string alto;
+
+    private void Awake()
+    {
+        
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,11 +67,24 @@ public class SpawnTerreno : MonoBehaviour
     {
         Pilar.transform.position = new Vector3(0, 0, 0);
         Pilar.transform.localScale = new Vector3(1.0f, _alto*10.0f, 1.0f);  // x z 
-        Contenedor.SetActive(false);
+        //Contenedor.SetActive(false);
     }
 
     private void GenerarBarda()
     {
         //Estandarizar medidas para bardas.
+        float x = _largo / 2;
+        var z = _ancho / 2;
+        GameObject Pilares = Instantiate(Pilar) as GameObject;
+        for (float i = x*-1.0f; i <= x; i++)
+        {
+            for(float j = z*-1.0f; j <= z; j++)
+            {
+                var finalPosition = new Vector3(i,0,j);
+                Pilares.transform.position = finalPosition;
+            }
+        }
     }
+
+    
 }

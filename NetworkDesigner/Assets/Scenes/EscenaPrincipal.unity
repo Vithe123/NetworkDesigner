@@ -588,8 +588,8 @@ GameObject:
   - component: {fileID: 1264915716}
   - component: {fileID: 1264915714}
   - component: {fileID: 1264915713}
-  - component: {fileID: 1264915712}
   - component: {fileID: 1264915715}
+  - component: {fileID: 1264915712}
   m_Layer: 0
   m_Name: Terreno
   m_TagString: Terreno

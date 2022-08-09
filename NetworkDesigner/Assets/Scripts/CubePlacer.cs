@@ -51,7 +51,8 @@ public class CubePlacer : MonoBehaviour
     private void PlaceCubeNear(Vector3 clickPoint)
     {
         GameObject Pilares = Instantiate(Pilar) as GameObject;
-        var finalPosition = grid.GetNearestPointOnGrid(clickPoint);
+        Vector3 finalPosition = grid.GetNearestPointOnGrid(clickPoint);
+        Debug.Log(finalPosition);
         Pilares.transform.position = finalPosition;
     }
 }
