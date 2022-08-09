@@ -14,7 +14,7 @@ public class SpawnTerreno : MonoBehaviour
     private float _largo;
     private float _ancho;
     private float _alto;
-    public float TamPilar = 1.0f;
+    private float TamPilar = 1.0f;
 
     private string numPisos;
     private string largo;
@@ -41,6 +41,16 @@ public class SpawnTerreno : MonoBehaviour
     {
     }
 
+    public float TamanoStandar()
+    {
+        return TamPilar;
+    }
+
+    public float enviarLargo()
+    {
+        return ((_alto*10)/2.0f)+0.5f;
+    }
+
     private void StringToInt()
     {
         bool success = int.TryParse(numPisos, out _numPisos);
@@ -53,7 +63,7 @@ public class SpawnTerreno : MonoBehaviour
     {
         GameObject terreno_medidas = Instantiate(Terreno) as GameObject;
         terreno_medidas.transform.position = new Vector3(0, 0, 0);
-        terreno_medidas.transform.localScale = new Vector3(_ancho, 1, _largo);  // x 
+        terreno_medidas.transform.localScale = new Vector3(_ancho*10, 1, _largo*10);  // x 
     }
 
     private void LoadData()
@@ -66,23 +76,38 @@ public class SpawnTerreno : MonoBehaviour
     private void AgrandarPilar()
     {
         Pilar.transform.position = new Vector3(0, 0, 0);
-        Pilar.transform.localScale = new Vector3(1.0f, _alto*10.0f, 1.0f);  // x z 
+        Pilar.transform.localScale = new Vector3(TamPilar, _alto*10, TamPilar);  // x z 
         //Contenedor.SetActive(false);
     }
 
     private void GenerarBarda()
     {
         //Estandarizar medidas para bardas.
-        float x = _largo / 2;
-        var z = _ancho / 2;
+        float x = _ancho*5;
+        float z = _largo*5;
+        Vector3 finalPosition;
         GameObject Pilares = Instantiate(Pilar) as GameObject;
+
         for (float i = x*-1.0f; i <= x; i++)
         {
-            for(float j = z*-1.0f; j <= z; j++)
-            {
-                var finalPosition = new Vector3(i,0,j);
-                Pilares.transform.position = finalPosition;
-            }
+            Pilares = Instantiate(Pilar) as GameObject;
+            finalPosition = new Vector3(i, enviarLargo(), z);
+            Pilares.transform.position = finalPosition;
+
+            Pilares = Instantiate(Pilar) as GameObject;
+            finalPosition = new Vector3(i, enviarLargo(), z*-1.0f);
+            Pilares.transform.position = finalPosition;
+        }
+
+        for (float i = z * -1.0f; i <= z; i++)
+        {
+            Pilares = Instantiate(Pilar) as GameObject;
+            finalPosition = new Vector3(x, enviarLargo(), i);
+            Pilares.transform.position = finalPosition;
+
+            Pilares = Instantiate(Pilar) as GameObject;
+            finalPosition = new Vector3(x * -1.0f, enviarLargo(), i);
+            Pilares.transform.position = finalPosition;
         }
     }
 
