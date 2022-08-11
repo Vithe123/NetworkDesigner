@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 
 public class CubePlacer : MonoBehaviour
 {
@@ -19,21 +21,22 @@ public class CubePlacer : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+
         Vector3 collision = Vector3.zero;
         RaycastHit hitInfo;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         if (Input.GetMouseButtonDown(0))
         {
-            if (Physics.Raycast(ray, out hitInfo))
-            {
-                LastHit = hitInfo.transform.gameObject;
-                collision = hitInfo.point;
-                if (LastHit.tag != "Pilar")
+                if (Physics.Raycast(ray, out hitInfo))
                 {
-                    PlaceCubeNear(hitInfo.point);
-                } 
-            }
+                    BoxCollider bc = hitInfo.collider as BoxCollider;
+                    //LastHit = hitInfo.transform.gameObject;
+                    collision = hitInfo.point;
+                    if (bc.tag != "Pilar")
+                    {
+                        PlaceCubeNear(hitInfo.point);
+                    }
+                }
         }
         if (Input.GetMouseButtonDown(1))
         {
@@ -42,7 +45,10 @@ public class CubePlacer : MonoBehaviour
                 BoxCollider bc = hitInfo.collider as BoxCollider;
                 if (bc != null)
                 {
-                    Destroy(bc.gameObject);
+                    if (bc.tag == "Pilar")
+                    {
+                        Destroy(bc.gameObject);
+                    }
                 }
             }
         }

@@ -75,7 +75,7 @@ public class SpawnTerreno : MonoBehaviour
     }
     private void AgrandarPilar()
     {
-        Pilar.transform.position = new Vector3(0, 0, 0);
+        //Pilar.transform.position = new Vector3(0, 0, 0);
         Pilar.transform.localScale = new Vector3(TamPilar, _alto*10, TamPilar);  // x z 
         //Contenedor.SetActive(false);
     }
