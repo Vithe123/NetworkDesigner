@@ -14,6 +14,8 @@ public class SpawnTerreno : MonoBehaviour
     private float _largo;
     private float _ancho;
     private float _alto;
+    private float _acumAltoPisosTerreno;
+    private float _acumAltoPisosPilar;
     private float TamPilar = 1.0f;
 
     private string numPisos;
@@ -31,9 +33,10 @@ public class SpawnTerreno : MonoBehaviour
     {
         LoadData();
         StringToInt();
-        SpawnearTerreno();
+        SpawnearTerreno(0,0,0);
         AgrandarPilar();
         GenerarBarda();
+        CheckPisosExtra();
     }
 
     // Update is called once per frame
@@ -59,11 +62,12 @@ public class SpawnTerreno : MonoBehaviour
         _alto = float.Parse(alto);
     }
 
-    public void SpawnearTerreno()
+    public void SpawnearTerreno(float xPos, float yPos, float zPos)
     {
         GameObject terreno_medidas = Instantiate(Terreno) as GameObject;
-        terreno_medidas.transform.position = new Vector3(0, 0, 0);
+        terreno_medidas.transform.position = new Vector3(xPos, yPos, zPos);
         terreno_medidas.transform.localScale = new Vector3(_ancho*10, 1, _largo*10);  // x 
+        _acumAltoPisosTerreno = _acumAltoPisosTerreno + (_alto * 10) + 1;
     }
 
     private void LoadData()
@@ -91,25 +95,36 @@ public class SpawnTerreno : MonoBehaviour
         for (float i = x*-1.0f; i <= x; i++)
         {
             Pilares = Instantiate(Pilar) as GameObject;
-            finalPosition = new Vector3(i, enviarLargo(), z);
+            finalPosition = new Vector3(i, enviarLargo() + _acumAltoPisosPilar, z);
             Pilares.transform.position = finalPosition;
 
             Pilares = Instantiate(Pilar) as GameObject;
-            finalPosition = new Vector3(i, enviarLargo(), z*-1.0f);
+            finalPosition = new Vector3(i, enviarLargo() + _acumAltoPisosPilar, z*-1.0f);
             Pilares.transform.position = finalPosition;
         }
 
         for (float i = z * -1.0f; i <= z; i++)
         {
             Pilares = Instantiate(Pilar) as GameObject;
-            finalPosition = new Vector3(x, enviarLargo(), i);
+            finalPosition = new Vector3(x, enviarLargo() + _acumAltoPisosPilar, i);
             Pilares.transform.position = finalPosition;
 
             Pilares = Instantiate(Pilar) as GameObject;
-            finalPosition = new Vector3(x * -1.0f, enviarLargo(), i);
+            finalPosition = new Vector3(x * -1.0f, enviarLargo() + _acumAltoPisosPilar, i);
             Pilares.transform.position = finalPosition;
         }
+        _acumAltoPisosPilar = _acumAltoPisosPilar + (_alto * 10) + 1;
     }
 
-    
+    private void CheckPisosExtra()
+    {
+        if (_numPisos > 1)
+        {
+            for(int i = 1; i < _numPisos; i++)
+            {
+                SpawnearTerreno(0, _acumAltoPisosTerreno, 0);
+                GenerarBarda();
+            }
+        }
+    }
 }

@@ -25,7 +25,7 @@ public class CubePlacer : MonoBehaviour
         Vector3 collision = Vector3.zero;
         RaycastHit hitInfo;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
                 if (Physics.Raycast(ray, out hitInfo))
                 {
@@ -38,7 +38,7 @@ public class CubePlacer : MonoBehaviour
                     }
                 }
         }
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButton(1))
         {
             if (Physics.Raycast(ray, out hitInfo))
             {
