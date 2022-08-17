@@ -21,7 +21,6 @@ public class CubePlacer : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-
         Vector3 collision = Vector3.zero;
         RaycastHit hitInfo;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
